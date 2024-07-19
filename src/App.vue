@@ -1,10 +1,12 @@
 <template>
   <div>
     <el-button @click="open">打开</el-button>
-    <ChildComponent v-model:visible="flag"></ChildComponent>
+<el-button @click="open2">打</el-button>
   </div>
+  <ChildComponent v-model:visible="flag" :text="inputTest"></ChildComponent>
 </template>
 <script>
+
 import {ref, watch} from 'vue'
 import ChildComponent from "@/components/ChildComponent.vue";
 
@@ -15,7 +17,8 @@ export default {
   },
   data() {
     return {
-      dialogVisible: false
+      dialogVisible: false,
+      inputTest: 'test'
     };
   },
   methods: {
@@ -34,6 +37,11 @@ export default {
 
     const open = () => {
       flag.value = true
+      this.inputTest = "fuck you"
+    }
+    const open2 = () => {
+      flag.value = true
+      this.inputTest = "fuck you again"
     }
 
     watch(() => flag.value, (val) => {
@@ -42,7 +50,8 @@ export default {
 
     return {
       flag,
-      open
+      open,
+      open2
     }
   }
 }

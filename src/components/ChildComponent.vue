@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <el-dialog title="提示" v-model="dialogVisble" width="30%" :before-close="close">
-      <span>这是一段信息</span>
+      <span>{{text}}</span>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="close">取 消</el-button>
@@ -17,6 +17,10 @@
 
   export default {
     props: {
+      text: {
+        type: String,
+        default: ''
+      },
       visible: {
         type: Boolean,
         default: false
