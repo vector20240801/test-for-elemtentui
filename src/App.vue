@@ -1,15 +1,49 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <el-button @click="open">打开</el-button>
+    <ChildComponent v-model:visible="flag"></ChildComponent>
+  </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {ref, watch} from 'vue'
+import ChildComponent from "@/components/ChildComponent.vue";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ChildComponent
+  },
+  data() {
+    return {
+      dialogVisible: false
+    };
+  },
+  methods: {
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+          // eslint-disable-next-line no-unused-vars
+          .then(_ => {
+            done();
+          })
+          // eslint-disable-next-line no-unused-vars
+          .catch(_ => {
+          });
+    }
+  }, setup() {
+    const flag = ref(false)
+
+    const open = () => {
+      flag.value = true
+    }
+
+    watch(() => flag.value, (val) => {
+      console.log("监听flag值得变化:", val)
+    })
+
+    return {
+      flag,
+      open
+    }
   }
 }
 </script>
